@@ -1,2 +1,2 @@
-/siteIK/settings.py
-/siteIK/settings.pyc
+*.pyc
+siteIK/settings.py
