@@ -1,11 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, redirect
+from main.models import IK, Article
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html', {})
+    numeros = IK.objects.all()
+    return render(request, 'index.html', {'numeros' : numeros})
 
 def submit(request):
-    return render(request, 'submit.html', {})
+    articles = Article.objects.all()
+    return render(request, 'submit.html', {'articles' : articles})
+
+def show(request, id):
+    ik = IK.objects.get(id=id)
+    response = HttpResponse(ik.fichier, content_type='application/pdf')
+    response['Content-Disposition'] = "attachment; filename="+str(ik.numero)+".pdf"
+    return response
+
+#Login temporaire
+def login(request, auth):
+    request.session['auth'] = auth
+    return redirect(index)
 
 def logout(request):
     del request.session["username"]

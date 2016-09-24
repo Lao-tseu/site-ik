@@ -3,5 +3,14 @@
 {% block title %}Soumettre un article{% endblock %}
 
 {% block body %}
-  <h1>Page pour proposer des articles à l'IKman</h1>
+  <h1>Proposer un article à l'IK(-wo-)man</h1>
+  {% if request.session.auth == "admin" %}
+    <ul class="list-group">
+    {% for article in articles %}
+      <li class="list-group-item">{{ article.titre }} proposé par {{ article.auteur }}</li>
+    {% empty %}
+      Aucun article n'a été proposé pour le moment.
+    {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock %}

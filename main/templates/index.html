@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
-{% block title %} Page d'accueil {% endblock %}
+{% block title %} Infokès {% endblock %}
 
 {% block body %}
-  <h1>Page d'accueil</h1>
+  <h1>Tous les numéros</h1>
+  {% for numero in numeros %}
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+      <a href="/show/{{ numero.id }}"><img style="width: 150px; height: 210px;" src="{% static numero.miniature.name %}" title="{{ numero.titre}}"/></a>
+      <br>
+      <span style="text-align: center">{{ numero.titre }}</span>
+      <br><br>
+    </div>
+  {% endfor %}
 {% endblock %}
